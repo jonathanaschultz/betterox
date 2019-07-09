@@ -1,0 +1,37 @@
+<div>
+  <br>
+  <mat-card>
+    <section class="mat-typography">
+      <h3>Sign-In for Rush</h3>
+    </section>
+    <mat-divider></mat-divider>
+    <br>
+    <form [formGroup]="newPNMForm" class="create-form">
+      <mat-form-field class="field-full-width">
+        <input matInput placeholder="Name" formControlName="name" #name>
+      </mat-form-field>
+	  <br>
+	  <mat-form-field>
+		<mat-select placeholder="Year" formControlName="year" #year>
+			<mat-option value="Freshman">Freshman</mat-option>
+			<mat-option value="Sophomore">Sophomore</mat-option>
+			<mat-option value="Junior">Junior</mat-option>
+			<mat-option value="Junior Transfer">Junior Transfer</mat-option>
+			<mat-option value="Senior">Senior</mat-option>
+		</mat-select>
+	  </mat-form-field>
+	  <br>
+      <mat-form-field class="field-full-width">
+        <input matInput placeholder="Email Address" formControlName="email" #email>
+      </mat-form-field>
+	  <br>
+      <mat-form-field class="field-full-width">
+        <input matInput placeholder="Phone Number" formControlName="phone" #phone>
+      </mat-form-field>
+	  <mat-divider></mat-divider>
+      <br><br>
+      <button mat-raised-button color="accent" [routerLink]="['/list', access]">Back</button>&nbsp;
+      <button type="submit" (click)="addPNM(name.value, year.value, email.value, phone.value)" [disabled]="newPNMForm.pristine || newPNMForm.invalid" mat-raised-button color="primary">Submit</button>
+    </form>
+  </mat-card>
+</div>

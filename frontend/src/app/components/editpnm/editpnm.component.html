@@ -1,0 +1,48 @@
+<div>
+    <br>
+    <mat-card>
+      <section class="mat-typography">
+          <h3>Edit PNM</h3>
+      </section>
+      <mat-divider></mat-divider>
+      <br>
+      <form [formGroup]="editForm" class="edit-form">
+		<input type="file" [hidden]="true" accept="image/*" (change)="previewUpload(file.files[0])" #file>
+		<button mat-raised-button (click)="file.click()" #upload>Upload Picture</button>
+		<br>
+		<br>
+		<img [src]="uploads + rushee.pic" height="350" alt="Preview of Uploaded Image">
+		<br>
+		<br>
+        <mat-form-field class="field-full-width">
+          <input placeholder="Name" matInput formControlName="name" #name>
+        </mat-form-field>
+		<br>
+	    <mat-form-field>
+		  <mat-select placeholder="Year" formControlName="year" #year>
+			  <mat-option value="Freshman">Freshman</mat-option>
+			  <mat-option value="Sophomore">Sophomore</mat-option>
+			  <mat-option value="Junior">Junior</mat-option>
+			  <mat-option value="Junior Transfer">Junior Transfer</mat-option>
+			  <mat-option value="Senior">Senior</mat-option>
+		  </mat-select>
+	    </mat-form-field>
+	    <br>
+        <mat-form-field class="field-full-width">
+          <input placeholder="Email Address" matInput formControlName="email" #email>
+        </mat-form-field>
+		<br>
+        <mat-form-field class="field-full-width">
+          <input placeholder="Phone Number" matInput formControlName="phone" #phone>
+        </mat-form-field>
+		<br>
+		<mat-form-field class="field-full-width">
+		  <input placeholder="Status" matInput formControlName="stat" #stat>
+        </mat-form-field>
+        <mat-divider></mat-divider>
+        <br><br>
+        <button mat-raised-button color="accent" [routerLink]="['/list', access]">Back</button>&nbsp;
+        <button type="submit" (click)="editPNM(name.value, year.value, email.value, phone.value, stat.value, file.files[0])" [disabled]="editForm.invalid" mat-raised-button color="primary">Save</button>
+      </form>
+    </mat-card>
+</div>

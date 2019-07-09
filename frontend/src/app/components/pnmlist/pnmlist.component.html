@@ -1,0 +1,79 @@
+<div>
+	<br>
+	<mat-card [ngSwitch]="access">
+	    <section class="mat-typography">
+			<h3>Rushee List</h3>
+		</section>
+		<button *ngSwitchCase="1" mat-raised-button color="primary" [routerLink]="['/newpnm', access]">New PNM</button>
+		<button *ngSwitchCase="-1" mat-raised-button color="primary" [routerLink]="['/newpnm', access]">Sign In</button>
+		<mat-divider></mat-divider>
+		<br>
+		<mat-grid-list cols="1" rowHeight="250px" gutterSize="10px">
+			<mat-grid-tile *ngFor="let rushee of rushees" [ngSwitch]="access"
+			[style.border]="solid">
+				<img [src]="uploads + rushee.pic" height="175px" />
+				<i *ngSwitchCase="2">
+					Name: {{rushee.name}}
+					<br>
+					Year: {{rushee.year}}
+					<br>
+					Status: {{rushee.stat}}
+					<br>
+					Email: {{rushee.email}}
+					<br>
+					Phone: {{rushee.phone}}
+					<br>
+					Present?: {{pnmService.isPresent(rushee.checkin[0], rushee.checkout[0])}}
+					<br>
+					Total Comments: {{rushee.lencomments}}
+				</i>
+				<i *ngSwitchCase="1">
+					Name: {{rushee.name}}
+					<br>
+					Year: {{rushee.year}}
+					<br>
+					Status: {{rushee.stat}}
+					<br>
+					Email: {{rushee.email}}
+					<br>
+					Phone: {{rushee.phone}}
+					<br>
+					Present?: {{pnmService.isPresent(rushee.checkin[0], rushee.checkout[0])}}
+				</i>
+				<i *ngSwitchCase="0">
+					Name: {{rushee.name}}
+					<br>
+					Year: {{rushee.year}}
+					<br>
+					Status: {{rushee.stat}}
+					<br>
+				</i>
+				<i *ngSwitchDefault>
+					Name: {{rushee.name}}
+					<br>
+					Year: {{rushee.year}}
+					<br>
+				</i>
+			<mat-grid-tile-footer>
+				<p *ngSwitchCase="2">
+					<button mat-raised-button color="primary" (click)="commentPNM(rushee.id)">Comment</button>
+					<button mat-raised-button color="primary" (click)="editPNM(rushee.id)">Edit</button>
+					<button mat-raised-button color="primary" (click)="checkinPNM(rushee.id)">Check-in</button>
+					<button mat-raised-button color="primary" (click)="checkoutPNM(rushee.id)">Check-out</button>
+				</p>
+				<p *ngSwitchCase="1">
+					<button mat-raised-button color="primary" (click)="commentPNM(rushee.id)">Comment</button>
+					<button mat-raised-button color="primary" (click)="editPNM(rushee.id)">Edit</button>
+					<button mat-raised-button color="primary" (click)="checkinPNM(rushee.id)">Check-in</button>
+					<button mat-raised-button color="primary" (click)="checkoutPNM(rushee.id)">Check-out</button>
+				</p>
+				<p *ngSwitchCase="0">
+					<button mat-raised-button color="primary" (click)="commentPNM(rushee.id)">Comment</button>
+				</p>
+				<p *ngSwitchDefault>
+				</p>
+			</mat-grid-tile-footer>
+			</mat-grid-tile>
+		</mat-grid-list>
+	</mat-card>
+</div>

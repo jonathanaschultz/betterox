@@ -1,0 +1,69 @@
+<div>
+	<br>
+	<mat-card [ngSwitch]="access">
+		<section class="mat-typography">
+			<h2>PNM Information</h2>
+		</section>
+		<img [src]="uploads + rushee.pic" height="350px" />
+		<br>
+		<i *ngSwitchCase="2">
+			Name: {{rushee.name}}
+			<br>
+			Year: {{rushee.year}}
+			<br>
+			Status: {{rushee.stat}}
+			<br>
+			Email: {{rushee.email}}
+			<br>
+			Phone: {{rushee.phone}}
+			<br>
+            Present?: {{pnmService.isPresent(rushee.checkin[0], rushee.checkout[0])}}
+			<br>
+			Total Comments: {{rushee.lencomments}}
+		</i>
+		<i *ngSwitchCase="1">
+			Name: {{rushee.name}}
+			<br>
+			Year: {{rushee.year}}
+			<br>
+			Status: {{rushee.stat}}
+			<br>
+			Present?: {{pnmService.isPresent(rushee.checkin[0], rushee.checkout[0])}}
+		</i>
+		<i *ngSwitchDefault>
+			Name: {{rushee.name}}
+			<br>
+			Year: {{rushee.year}}
+			<br>
+			Status: {{rushee.stat}}
+		</i>
+		<mat-divider></mat-divider>
+		<br>
+		<section class="mat-typography">
+			<h2>Comment Form</h2>
+		</section>
+		<form [formGroup]="commentForm" class="comment-form">
+			<mat-form-field class="field-full-width">
+				<input placeholder="Name" matInput formControlName="name" #name>
+			</mat-form-field>
+			<br>
+			<mat-form-field class="field-full-width">
+				<textarea placeholder="Comment" matInput formControlName="comment" #comment></textarea>
+			</mat-form-field>
+			<br>
+			<mat-form-field class="field-full-width">
+				<input placeholder="Rating" matInput formControlName="rating" #rating>
+			</mat-form-field>
+			<br>
+			<button type="submit" (click)="commentPNM(name.value, comment.value, rating.value)" [disabled]="commentForm.invalid" mat-raised-button color="primary">Comment</button>
+		</form>
+		<br>
+		<mat-divider></mat-divider>
+		<section class="mat-typography">
+			<h2>Comments</h2>
+		</section>
+		<ul>
+			<li *ngFor="let comment of rushee.comments">{{comment.comm}}    <i>- {{comment.owner}}</i> <b><br>RATING: {{comment.rating}}</b><br><br>
+		</ul>
+	</mat-card>
+</div>
